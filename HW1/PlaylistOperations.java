@@ -28,7 +28,7 @@ public class PlaylistOperations {
         }
         return false;
         }
-    public static void main(String[] arguments){
+    public static void main(String[] arguments) throws Exception{
         Scanner scanned = new Scanner(System.in);
         System.out.println("For music stuff, please use the following commands:"
                 + "\n Add Song: A <Title> <Artist> <Minutes> <Seconds> <Position>" +
@@ -45,7 +45,25 @@ public class PlaylistOperations {
             System.out.println("Invalid input.  Check again");
         }
 
+       String[] tokens = input.split(" ");
         //Actually does the thing:
+        switch(tokens[0]) {
+            case ("A"):
+                SongRecord song = new SongRecord();
+                song.setTitle(tokens[1]);
+                song.setArtist(tokens[2]);
+                song.setMins(Integer.parseInt(tokens[3]));
+                song.setSecs(Integer.parseInt(tokens[4]));
+                puyol.addSong(song,Integer.parseInt(tokens[5]));
+            case ("G"):
+                System.out.println(puyol.getSong(Integer.parseInt(tokens[1])));
+            case("R"):
+                puyol.removeSong(Integer.parseInt(tokens[1]));
+            case("P"):
+                puyol.printAllSongs();
+            case("B"):
+                puyol.getSongsByArtist(puyol,tokens[1]);
 
+        }
     }
 }
